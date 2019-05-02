@@ -4,7 +4,8 @@ class Matematica{
 	vou aplicar tipos de variaveis e outros operadores mais
 	a frente no trab*/
 
-	private Variavel[] variaveis;
+	private Variavel[] x;
+	private Variavel[] y;
 
 	public Matematica(){
 
