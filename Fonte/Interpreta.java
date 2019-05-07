@@ -1,10 +1,27 @@
 class Interpreta{
 
 	private Entrada[] texto;
+	private String checkN;
+	private double checkV1, checkV2;
+	private boolean ok;
+	private int i, cont;
+	private String condicao1 = "se";
+	private String condicao2 = "senao";
+	private String iteracao = "loop";
+
+
+	public Interpreta(){
+		this.texto = new Interpreta();
+		this.texto = new Matematica();
+		this.texto = new Variavel();
+		this.texto = new Entrada();
+		this.texto = new Saida();
+
+	}
 
 	public void Start(){
 		for(i=0;i<texto.length();i++){
-			if(texto[i] == "m" && texto[i+1] == "a" && texto[i+2] == "i" && texto[i+3] == "n"){
+			if(this.texto.equals("main")){
 				ok = true;
 			}
 			else{println("ERRO");}
@@ -14,8 +31,8 @@ class Interpreta{
 	public int countLines(){
 		while(ok == true){
 			for(i=0;i<texto.length();i++){
-				if{texto[i] == "\n"}{
-					int cont++;
+				if(texto[i] == "\n"){
+					cont++;
 					return cont;
 				}
 			}
@@ -26,12 +43,16 @@ class Interpreta{
 		while(ok == true){
 			for(i=0;i<texto.length();i++){
 				if(texto[i] == "="){
-					/*Preciso achar algo que faca minha string andar pra tras ate achar um
-					 espaço em branco e guardar tudo q achar nesse percurso*/
-					 a.setNomeV();
-					 /*Preciso achar algo que faca minha string andar pra frente até achar
-					  um ; ou um operador matematico*/
-					 a.setValorV();
+					while(texto[i] != "\n"){
+						checkN += texto[i-1];
+						StringBuffer checkN += new StringBuffer(texto[i-1]);
+						i--;
+					}
+					this.setNomeV(checkN.reverse());
+					if(texto[i] == ";"){
+						checkV1 = texto[i-1];
+						this.setValorV(checkV1);
+					}	 
 				}	
 			}
 		}
@@ -41,38 +62,36 @@ class Interpreta{
 		while(ok == true){
 			for(i=0;i<texto.length();i++){
 				if(texto[i] == "+"){
-					/*Preciso de algo que ande a string pra tras ate achar um numero
-					 e guardar esse valor, o mesmo pra frente*/
-					a.soma(getValorV(), getValorV());
+					checkV1 = texto[i-1];
+					checkV2 = texto[i+1];
+					this.soma(checkV1, checkV2);
 				}
 				if(texto[i] == "-"){
-					/*Preciso de algo que ande a string pra tras ate achar um numero
-					 e guardar esse valor, o mesmo pra frente*/
-					a.sub(getValorV(), getValorV());
+					checkV1 = texto[i-1];
+					checkV2 = texto[i+1];
+					this.sub(checkV1, checkV2);
 				}
 				if(texto[i] == "*"){
-					/*Preciso de algo que ande a string pra tras ate achar um numero
-					 e guardar esse valor, o mesmo pra frente*/
-					a.mult(getValorV(), getValorV());	
+					checkV1 = texto[i-1];
+					checkV2 = texto[i+1];
+					this.mult(checkV1, checkV2);	
 				}
 				if(texto[i] == "/"){
-					/*Preciso de algo que ande a string pra tras ate achar um numero
-					 e guardar esse valor, o mesmo pra frente*/
-					a.div(getValorV(); getValorV());
+					checkV1 = texto[i-1];
+					checkV2 = texto[i+1];
+					this.div(checkV1, checkV2);
 				}
 			}
 		}
-	}]
- 	
- 	/*Talvez eu use palavras chave para os nomes reservados mas ainda tenho que aprender
- 	como trabalhar melhor com as strings*/
+	}
+
 	public void findCondicao(){
 		while(ok == true){
 			for(i=0;i<texto.lenght();i++){
-				if(texto[i] == "s" && texto[i+1] == "e"){
+				if(this.texto.equals(condicao1)){
 					/*Preciso de um metodo da classe condicao para executar o if*/
 				}
-				if(texto[i] == "s" && texto[i+1] == "n"){
+				if(this.texto.equals(condicao2)){
 					/*Preciso de um metodo da classe condicao para executar o else*/
 				}
 			}
@@ -82,7 +101,7 @@ class Interpreta{
 	public void findloop(){
 		while(ok == true){
 			for(i=0;i<texto.lenght();i++){
-				if(texto[i] == "l" && texto[i+1] == "p"){
+				if(this.texto.equals(iteracao)){
 					/*Preciso de um metodo da classe iteracao para executar o laço*/
 				}
 			}
@@ -91,14 +110,23 @@ class Interpreta{
 
 	public void findError(){
 		while(ok == true){
-			for(i=0;<texto.lenght();i++){
+			for(i=0;i<texto.lenght();i++){
 				if(texto[i] == "\n"){
-					if(texto[i-1] == ";"){
-						funciona == true;
-					}else{(funciona == false); println("ERROR LINHA "countLines());}
+					if(texto[i-1] != ";"){
+						ok = false;
+						println("ERROR LINHA "+countLines());
+					}
 				}
 
 			}
 		}
+	}
+
+	public String findPrint(){
+
+	}
+
+	public void FindScann(String s){
+
 	}
 }

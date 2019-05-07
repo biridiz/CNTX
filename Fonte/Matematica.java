@@ -13,21 +13,25 @@ class Matematica{
 
 	public int soma(int x, int y){
 		resul = (x + y);
+		this.setValorV(resul);
 		return resul;
 	}
 
 	public int sub(int x, int y){
 		resul = (x - y);
+		this.setValorV(resul);
 		return resul;
 	}
 
 	public int mult(int x, int y){
 		resul = (x * y);
+		this.setValorV(resul);
 		return resul;
 	}
 
 	public int div(int x, int y){
 		resul = (x / y);
+		this.setValorV(resul);
 		return resul;
 	}
 }

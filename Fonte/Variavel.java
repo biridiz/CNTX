@@ -1,6 +1,6 @@
 class Variavel{
 
-	private int valorV[];
+	private double valorV[];
 	private String nomeV[];
 
 	public String getNomeV(){
