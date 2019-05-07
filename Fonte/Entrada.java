@@ -1,20 +1,23 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
-class Entrada {
 
-	private String code;
-	
-	public Entrada(){
-		Scanner s = new Scanner(System.in);
-		this.code = new Entrada;
-		String code = s.nextLine();
+class Entrada{
 
-	}
-	
-	public void setCode(String texto){
-		this.code = code;
-	}
+	private String code, linha;
 
-	public String getCode(){
-		return this.code;
-	}
+	public static void read(String code) throws IOException {
+        BufferedReader buffRead = new BufferedReader(new FileReader(code));
+        String linha = "";
+        while (true){
+            if (linha != null){
+                System.out.println(linha);
+ 
+            }else
+                break;
+            linha = buffRead.readLine();
+        }
+        buffRead.close();
+    }
 }

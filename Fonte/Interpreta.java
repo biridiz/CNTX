@@ -1,16 +1,18 @@
 class Interpreta{
 
-	private Entrada[] texto;
-	private String checkN;
+	private String texto;
+	private String checkN, s;
 	private double checkV1, checkV2;
 	private boolean ok;
 	private int i, cont;
 	private String condicao1 = "se";
 	private String condicao2 = "senao";
 	private String iteracao = "loop";
+	private String print = "print";
+	private String scan = "scan";
 
 
-	public Interpreta(){
+	public Interpreta(String texto){
 		this.texto = new Interpreta();
 		this.texto = new Matematica();
 		this.texto = new Variavel();
@@ -19,7 +21,7 @@ class Interpreta{
 
 	}
 
-	public void Start(){
+	public void Start(String texto){
 		for(i=0;i<texto.length();i++){
 			if(this.texto.equals("main")){
 				ok = true;
@@ -28,7 +30,7 @@ class Interpreta{
 		}
 	}
 
-	public int countLines(){
+	public int countLines(String texto){
 		while(ok == true){
 			for(i=0;i<texto.length();i++){
 				if(texto[i] == "\n"){
@@ -39,16 +41,16 @@ class Interpreta{
 		}
 	}
 
-	public void findVariavel(){
+	public void findVariavel(String texto){
 		while(ok == true){
 			for(i=0;i<texto.length();i++){
 				if(texto[i] == "="){
-					while(texto[i] != "\n"){
+					while(texto[i] != ""){
 						checkN += texto[i-1];
-						StringBuffer checkN += new StringBuffer(texto[i-1]);
 						i--;
 					}
-					this.setNomeV(checkN.reverse());
+					s = new StringBilder(checkN).reverse().toString();
+					this.setNomeV(s);
 					if(texto[i] == ";"){
 						checkV1 = texto[i-1];
 						this.setValorV(checkV1);
@@ -58,7 +60,7 @@ class Interpreta{
 		}
 	}
 
-	public void findOperation(){
+	public void findOperation(String texto){
 		while(ok == true){
 			for(i=0;i<texto.length();i++){
 				if(texto[i] == "+"){
@@ -85,7 +87,7 @@ class Interpreta{
 		}
 	}
 
-	public void findCondicao(){
+	public void findCondicao(String texto){
 		while(ok == true){
 			for(i=0;i<texto.lenght();i++){
 				if(this.texto.equals(condicao1)){
@@ -98,7 +100,7 @@ class Interpreta{
 		}
 	}
 
-	public void findloop(){
+	public void findloop(String texto){
 		while(ok == true){
 			for(i=0;i<texto.lenght();i++){
 				if(this.texto.equals(iteracao)){
@@ -108,7 +110,7 @@ class Interpreta{
 		}
 	}
 
-	public void findError(){
+	public void findError(String texto){
 		while(ok == true){
 			for(i=0;i<texto.lenght();i++){
 				if(texto[i] == "\n"){
@@ -122,11 +124,23 @@ class Interpreta{
 		}
 	}
 
-	public String findPrint(){
+	public String findPrint(String texto){
+		while(ok == true){
+			for(i=0;i<texto.lenght();i++){
+				if(this.texto.equals(print)){
 
+				}
+			}
+		}
 	}
 
-	public void FindScann(String s){
+	public void findScann(String texto){
+		while(ok == true){
+			for(i=0;i<texto.lenght();i++){
+				if(this.texto.equals(scan)){
 
+				}
+			}
+		}
 	}
 }

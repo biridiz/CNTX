@@ -16,7 +16,7 @@ class Variavel{
 	}
 
 
-	public void setValorV(int v){
+	public void setValorV(double v){
 		this.valorV = v;
 	}
 }
