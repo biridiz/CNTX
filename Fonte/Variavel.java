@@ -20,3 +20,4 @@ class Variavel{
 		this.valorV = v;
 	}
 }
+// Revisado por Fernando
