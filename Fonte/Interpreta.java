@@ -101,4 +101,4 @@ class Interpreta{
 			}
 		}
 	}
-}
+}// Revisado por Fernando

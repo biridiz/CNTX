@@ -30,4 +30,4 @@ class Matematica{
 		resul = (x / y);
 		return resul;
 	}
-}
+}// Revisado por Fernando

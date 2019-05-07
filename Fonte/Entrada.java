@@ -18,3 +18,4 @@ class Entrada {
 		return this.code;
 	}
 }
+// Revisado por Fernando
