@@ -1,39 +1,41 @@
+/*Esta classe Interpreta o arquivo de entrada*/
 class Interpreta{
 
+	/*Declaração de variaveis*/
 	private String texto;
 	private String checkN, s;
-	private double checkV1, checkV2;
+	private String checkV1, checkV2;
 	private boolean ok;
 	private int i, cont;
-	private String condicao1 = "se";
-	private String condicao2 = "senao";
-	private String iteracao = "loop";
-	private String print = "print";
-	private String scan = "scan";
+	private double[] valorV;
+	private String[] nomeV; 
+	private double[] resul;
 
-
-	public Interpreta(String texto){
-		this.texto = new Interpreta();
-		this.texto = new Matematica();
-		this.texto = new Variavel();
-		this.texto = new Entrada();
-		this.texto = new Saida();
-
+	/*Construtor da classe*/
+	public Interpreta(String s){
+		valorV = new double[500];
+		nomeV = new String[500];
+		resul = new double[500];
+		this.texto = s;
 	}
 
-	public void Start(String texto){
-		for(i=0;i<texto.length();i++){
+	/*Este metodo chequa se a palavra "main" está no arquivo para poder iniciar*/
+	public void Start(){
+		for(i=0;i<this.texto.length();i++){
 			if(this.texto.equals("main")){
 				ok = true;
 			}
-			else{println("ERRO");}
+			else{
+				System.out.println("ERRO");
+			}
 		}
 	}
 
-	public int countLines(String texto){
-		while(ok == true){
+	/*Este método conta o número de linhas*/
+	public int countLines(){
+		while(ok){
 			for(i=0;i<texto.length();i++){
-				if(texto[i] == "\n"){
+				if(texto.charAt(i) == '\n'){
 					cont++;
 					return cont;
 				}
@@ -41,106 +43,59 @@ class Interpreta{
 		}
 	}
 
-	public void findVariavel(String texto){
-		while(ok == true){
-			for(i=0;i<texto.length();i++){
-				if(texto[i] == "="){
-					while(texto[i] != ""){
-						checkN += texto[i-1];
+	/*Este método identica as variaveis no texto e armazena seu nome e valor*/
+	public void findVariavel(){
+		while(ok){
+			for(i=0;i<this.texto.length();i++){
+				if(texto.charAt(i) == '='){
+					while(texto.charAt(i) != ' '){
 						i--;
+						checkN.charAt(i) += texto.charAt(i);
+						s = new StringBilder(checkN).reverse().toString(); //-> aqui tem um erro, achar outro jeito
+						nomeV[i] = s;									     // de inverter a String
 					}
-					s = new StringBilder(checkN).reverse().toString();
-					this.setNomeV(s);
-					if(texto[i] == ";"){
-						checkV1 = texto[i-1];
-						this.setValorV(checkV1);
+
+					if(texto.charAt(i) == ';'){
+						checkV1 = texto.charAt(i-1);
+						valorV[i] = Double.parseDouble(checkV1);
 					}	 
 				}	
 			}
 		}
 	}
 
-	public void findOperation(String texto){
-		while(ok == true){
-			for(i=0;i<texto.length();i++){
-				if(texto[i] == "+"){
-					checkV1 = texto[i-1];
-					checkV2 = texto[i+1];
-					this.soma(checkV1, checkV2);
+	/*Este método identifica as operações matematicas e já as calcula*/
+	public void findOperation(){
+		while(ok){
+			for(i=0;i<this.texto.length();i++){
+				if(texto.charAt(i) == '+'){
+					checkV1 = texto.charAt(i-1);
+					valorV[i] = Double.parseDouble(checkV1);
+					checkV2 = texto.charAt(i+1);
+					valorV[i+1] = Double.parseDouble(checkV2);
+					resul[i] = (valorV[i] + valorV[i+1]);
 				}
-				if(texto[i] == "-"){
-					checkV1 = texto[i-1];
-					checkV2 = texto[i+1];
-					this.sub(checkV1, checkV2);
+				if(texto.charAt(i) == '-'){
+					checkV1 = texto.charAt(i-1);
+					valorV[i] = Double.parseDouble(checkV1);
+					checkV2 = texto.charAt(i+1);
+					valorV[i+1] = Double.parseDouble(checkV2);
+					resul[i] = (valorV[i] - valorV[i+1]);
 				}
-				if(texto[i] == "*"){
-					checkV1 = texto[i-1];
-					checkV2 = texto[i+1];
-					this.mult(checkV1, checkV2);	
+				if(texto.charAt(i) == '*'){
+					checkV1 = texto.charAt(i-1);
+					valorV[i] = Double.parseDouble(checkV1);
+					checkV2 = texto.charAt(i+1);
+					valorV[i+1] = Double.parseDouble(checkV2);
+					resul[i] = (valorV[i] * valorV[i+1]);	
 				}
-				if(texto[i] == "/"){
-					checkV1 = texto[i-1];
-					checkV2 = texto[i+1];
-					this.div(checkV1, checkV2);
-				}
-			}
-		}
-	}
-
-	public void findCondicao(String texto){
-		while(ok == true){
-			for(i=0;i<texto.lenght();i++){
-				if(this.texto.equals(condicao1)){
-					/*Preciso de um metodo da classe condicao para executar o if*/
-				}
-				if(this.texto.equals(condicao2)){
-					/*Preciso de um metodo da classe condicao para executar o else*/
+				if(texto.charAt(i) == '/'){
+					checkV1 = texto.charAt(i-1);
+					valorV[i] = Double.parseDouble(checkV1);
+					checkV2 = texto.charAt(i+1);
+					valorV[i+1] = Double.parseDouble(checkV2);
+					resul[i] = (valorV[i] / valorV[i+1]);				}
 				}
 			}
 		}
 	}
-
-	public void findloop(String texto){
-		while(ok == true){
-			for(i=0;i<texto.lenght();i++){
-				if(this.texto.equals(iteracao)){
-					/*Preciso de um metodo da classe iteracao para executar o laço*/
-				}
-			}
-		}
-	}
-
-	public void findError(String texto){
-		while(ok == true){
-			for(i=0;i<texto.lenght();i++){
-				if(texto[i] == "\n"){
-					if(texto[i-1] != ";"){
-						ok = false;
-						println("ERROR LINHA "+countLines());
-					}
-				}
-
-			}
-		}
-	}
-
-	public String findPrint(String texto){
-		while(ok == true){
-			for(i=0;i<texto.lenght();i++){
-				if(this.texto.equals(print)){
-
-				}
-			}
-		}
-	}
-
-	public void findScann(String texto){
-		while(ok == true){
-			for(i=0;i<texto.lenght();i++){
-				if(this.texto.equals(scan)){
-
-				}
-			}
-		}
-	}
-}

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 class Entrada{
 
-	private String code, linha;
+	private String code, linha;    
 
 	public static void read(String code) throws IOException {
         BufferedReader buffRead = new BufferedReader(new FileReader(code));
@@ -20,4 +20,5 @@ class Entrada{
         }
         buffRead.close();
     }
+
 }

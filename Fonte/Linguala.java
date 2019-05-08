@@ -1,24 +1,18 @@
 import java.util.Scanner;
+import java.io.IOException;
 
 class Linguala{
 
 	public static void main(String args[]) throws IOException{
 		
-		public String file;
-		public Interpreta start;
 
 		Scanner file = new Scanner(System.in);
-		Entrada.read(file);
-		Interpreta start = new Interpreta(file);
-		start.Interpreta.start(file);
-		start.Interpreta.countLines(file);
-		start.Interpreta.findVariavel(file);
-		start.Interpreta.findOperation(file);
-		start.Interpreta.findCondicao(file);
-		start.Interpreta.findLoop(file);
-		start.Interpreta.findError(file);
-		start.Interpreta.findPrint(file);
-		start.Interpreta.findScan(file);
+		Entrada open = new Entrada();
+		Interpreta start = new Interpreta(open.read(file));
+		start.Interpreta.start();
+		start.Interpreta.countLines();
+		start.Interpreta.findVariavel();
+		start.Interpreta.findOperation();
 
 
 	}
