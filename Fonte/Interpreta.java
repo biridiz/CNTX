@@ -37,10 +37,10 @@ class Interpreta{
 			for(i=0;i<texto.length();i++){
 				if(texto.charAt(i) == '\n'){
 					cont++;
-					return cont;
 				}
 			}
 		}
+		return cont;
 	}
 
 	/*Este método identica as variaveis no texto e armazena seu nome e valor*/
@@ -50,13 +50,12 @@ class Interpreta{
 				if(texto.charAt(i) == '='){
 					while(texto.charAt(i) != ' '){
 						i--;
-						checkN.charAt(i) += texto.charAt(i);
-						s = new StringBilder(checkN).reverse().toString(); //-> aqui tem um erro, achar outro jeito
-						nomeV[i] = s;									     // de inverter a String
+						checkN += texto.charAt(i);
+						//s = new StringBilder(checkN).reverse().toString();
 					}
 
 					if(texto.charAt(i) == ';'){
-						checkV1 = texto.charAt(i-1);
+						checkV1 += texto.charAt(i-1);
 						valorV[i] = Double.parseDouble(checkV1);
 					}	 
 				}	
@@ -69,30 +68,30 @@ class Interpreta{
 		while(ok){
 			for(i=0;i<this.texto.length();i++){
 				if(texto.charAt(i) == '+'){
-					checkV1 = texto.charAt(i-1);
+					checkV1 += texto.charAt(i-1);
 					valorV[i] = Double.parseDouble(checkV1);
-					checkV2 = texto.charAt(i+1);
+					checkV2 += texto.charAt(i+1);
 					valorV[i+1] = Double.parseDouble(checkV2);
 					resul[i] = (valorV[i] + valorV[i+1]);
 				}
 				if(texto.charAt(i) == '-'){
-					checkV1 = texto.charAt(i-1);
+					checkV1 += texto.charAt(i-1);
 					valorV[i] = Double.parseDouble(checkV1);
-					checkV2 = texto.charAt(i+1);
+					checkV2 += texto.charAt(i+1);
 					valorV[i+1] = Double.parseDouble(checkV2);
 					resul[i] = (valorV[i] - valorV[i+1]);
 				}
 				if(texto.charAt(i) == '*'){
-					checkV1 = texto.charAt(i-1);
+					checkV1 += texto.charAt(i-1);
 					valorV[i] = Double.parseDouble(checkV1);
-					checkV2 = texto.charAt(i+1);
+					checkV2 += texto.charAt(i+1);
 					valorV[i+1] = Double.parseDouble(checkV2);
 					resul[i] = (valorV[i] * valorV[i+1]);	
 				}
 				if(texto.charAt(i) == '/'){
-					checkV1 = texto.charAt(i-1);
+					checkV1 += texto.charAt(i-1);
 					valorV[i] = Double.parseDouble(checkV1);
-					checkV2 = texto.charAt(i+1);
+					checkV2 += texto.charAt(i+1);
 					valorV[i+1] = Double.parseDouble(checkV2);
 					resul[i] = (valorV[i] / valorV[i+1]);				}
 				}

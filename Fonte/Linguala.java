@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.io.IOException;
 
-class Linguala{
+class Linguala extends Interpreta{
 
 	public static void main(String args[]) throws IOException{
 		
@@ -9,10 +9,10 @@ class Linguala{
 		Scanner file = new Scanner(System.in);
 		Entrada open = new Entrada();
 		Interpreta start = new Interpreta(open.read(file));
-		start.Interpreta.start();
-		start.Interpreta.countLines();
-		start.Interpreta.findVariavel();
-		start.Interpreta.findOperation();
+		start.start();
+		start.countLines();
+		start.findVariavel();
+		start.findOperation();
 
 
 	}
