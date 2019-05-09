@@ -98,4 +98,38 @@ class Interpreta{
 				}
 			}
 		}
+
+		/*Precisa terminar esses metodos, pode ser aqui mesmo ou fazer uma classe para essas funçoes*/
+		public void finCondicao(){
+			for(i=0;i<this.texto.length();i++){
+				if(this.texto.equals("if")){
+
+				}
+			}
+		}
+
+		public void findIteracao(){
+			for(i=0;i<this.texto.length();i++){
+				if(this.texto.equals("loop")){
+
+				}
+			}
+		}
+
+		public void findPrint(){
+			for(i=0;i<this.texto.length();i++){
+				if(this.texto.equals("print")){
+
+				}
+			}
+
+		}
+
+		public void findScan(){
+			for(i=0;i<this.texto.length();i++){
+				if(this.texto.equals("scan")){
+
+				}
+			}
+		}
 	}
