@@ -1,12 +1,13 @@
 import java.util.Scanner;
 import java.io.IOException;
 
-class Linguala extends Interpreta{
+class Linguala{
 
 	public static void main(String args[]) throws IOException{
 		
 
-		Scanner file = new Scanner(System.in);
+		Scanner s = new Scanner(System.in);
+		String file = s.nextLine();
 		Entrada open = new Entrada();
 		Interpreta start = new Interpreta(open.read(file));
 		start.start();

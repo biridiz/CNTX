@@ -1,4 +1,4 @@
-class Saida extends Interpreta{
+class Saida{
 
 	public void Imprime(){
 		
