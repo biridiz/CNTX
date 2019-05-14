@@ -2,140 +2,137 @@
 class Interpreta{
 
 	/*Declaração de variaveis*/
-	private String texto;
-	private String checkN, s;
-	private String checkV1, checkV2;
+	private String[] code;
+	private Interpreta x = new Interpreta();
+	private Variavel[] var = new Variavel[200];
+	private Matematica m = new Matematica();
+	private Condi y = new Condi();
+	private Laco l = new Laco();
 	private boolean ok;
-	private int i, cont;
-	private double[] valorV;
-	private String[] nomeV; 
-	private double[] resul;
 
-	/*Construtor da classe*/
-	public Interpreta(String s){
-		valorV = new double[500];
-		nomeV = new String[500];
-		resul = new double[500];
-		this.texto = s;
-	}
+	public void start(String[] code){
 
-	/*Este metodo chequa se a palavra "main" está no arquivo para poder iniciar*/
-	public void Start(){
-		for(i=0;i<this.texto.length();i++){
-			if(this.texto.equals("main")){
-				ok = true;
-			}
-			else{
-				System.out.println("ERRO");
+		int i, a, b, c;
+		String aux;
+		Double v1, v2;
+		String[] check = new String[500];
+
+		/*Tira os espaços em branco*/
+		for(i=0;code[i] != null; i++){
+            if(this.code[i].contains("@print")==false){
+                code[i] = code[i].replaceAll(" ","");
+                code[i] = code[i].replaceAll("\t","");
+            }
+        }
+
+        /*Confere a palavra main para iniciar o código*/
+		for(i=0;i<this.code.length;i++){
+			if(this.code[i] != null){
+				if(this.code[i].equals("main")){
+					ok = true;
+				}
+				else{
+					System.out.println("ERRO linha -> ");
+				}
 			}
 		}
-	}
 
-	/*Este método conta o número de linhas*/
-	public int countLines(){
 		while(ok){
-			for(i=0;i<texto.length();i++){
-				if(texto.charAt(i) == '\n'){
-					cont++;
+			for(i=0;i<this.code.length;i++){
+				if(this.code[i] != null){
+					/*Encontra palavra chave @print*/
+					if(this.code[i].equals("@print")){
+						i++;
+						while(this.code[i] != ";"){
+							if(this.code[i].equals("@var")){
+								this.var[i].imprimeValue();
+							}
+							if(this.code[i].equals("'")){
+								i++;
+								while(this.code[i] != "'"){
+									System.out.println(this.code[i]);
+								}
+							}
+						}
+					}
+					/*Encontra variaveis*/
+					if(this.code[i].equals("@var")){
+						i++;
+						while(this.code[i] != ";" || this.code[i] != "="){
+							aux = this.code[i];
+							this.var[i].setName(aux);
+						}
+						/*Adiciona valor a variavel*/
+						if(this.code[i] == "="){
+							i++;
+							v1 = Double.parseDouble(this.code[i]);
+							this.var[i].setValue(v1);
+						}
+					}
+
+					/*Encontra operação de soma*/
+					if(this.code[i].equals("+")){
+						aux = this.code[i];
+						v1 = Double.parseDouble(this.code[i-1]);
+						v2 = Double.parseDouble(this.code[i+1]);
+						this.var[i].setValue(m.mat(v1, v2, aux));
+					}
+
+					/*Encontra operação de subtração*/
+					if(this.code[i].equals("-")){
+						aux = this.code[i];
+						v1 = Double.parseDouble(this.code[i-1]);
+						v2 = Double.parseDouble(this.code[i+1]);
+						this.var[i].setValue(m.mat(v1, v2, aux));
+					}
+
+					/*Encontra operação de multiplicação*/
+					if(this.code[i].equals("*")){
+						aux = this.code[i];
+						v1 = Double.parseDouble(this.code[i-1]);
+						v2 = Double.parseDouble(this.code[i+1]);
+						this.var[i].setValue(m.mat(v1, v2, aux));
+					}
+
+					/*Encontra operação de divisão*/
+					if(this.code[i].equals("/")){
+						aux = this.code[i];
+						v1 = Double.parseDouble(this.code[i-1]);
+						v2 = Double.parseDouble(this.code[i+1]);
+						this.var[i].setValue(m.mat(v1, v2, aux));
+					}
+
+					/*Encontra a condição*/
+					if(this.code[i].equals("@if")){
+						i++; v1 = Double.parseDouble(this.code[i]);
+						i++; aux = this.code[i];
+						i++; v2 = Double.parseDouble(this.code[i]);
+						while(y.se(v1, v2, aux)){
+							//i++;
+							if(this.code[i].equals("{")){
+								for(i=0;this.code[i] == "}";i++){
+									check[i] += code[i];
+								}
+								x.start(check);
+							}
+						}
+					}
+
+					if(this.code[i].equals("@loop")){
+						i++; a = Integer.parseInt(this.code[i]);
+						i++; b = Integer.parseInt(this.code[i]);
+						i++; c = Integer.parseInt(this.code[i]);
+						l.loop(a, b, c);
+					}
 				}
 			}
 		}
-		return cont;
+
+
+
+
+
+
 	}
 
-	/*Este método identica as variaveis no texto e armazena seu nome e valor*/
-	public void findVariavel(){
-		while(ok){
-			for(i=0;i<this.texto.length();i++){
-				if(texto.charAt(i) == '='){
-					while(texto.charAt(i) != ' '){
-						i--;
-						checkN += texto.charAt(i);
-						//s = new StringBilder(checkN).reverse().toString();
-					}
-
-					if(texto.charAt(i) == ';'){
-						checkV1 += texto.charAt(i-1);
-						valorV[i] = Double.parseDouble(checkV1);
-					}	 
-				}	
-			}
-		}
-	}
-
-	/*Este método identifica as operações matematicas e já as calcula*/
-	public void findOperation(){
-		while(ok){
-			for(i=0;i<this.texto.length();i++){
-				if(texto.charAt(i) == '+'){
-					checkV1 += texto.charAt(i-1);
-					valorV[i] = Double.parseDouble(checkV1);
-					checkV2 += texto.charAt(i+1);
-					valorV[i+1] = Double.parseDouble(checkV2);
-					resul[i] = (valorV[i] + valorV[i+1]);
-				}
-				if(texto.charAt(i) == '-'){
-					checkV1 += texto.charAt(i-1);
-					valorV[i] = Double.parseDouble(checkV1);
-					checkV2 += texto.charAt(i+1);
-					valorV[i+1] = Double.parseDouble(checkV2);
-					resul[i] = (valorV[i] - valorV[i+1]);
-				}
-				if(texto.charAt(i) == '*'){
-					checkV1 += texto.charAt(i-1);
-					valorV[i] = Double.parseDouble(checkV1);
-					checkV2 += texto.charAt(i+1);
-					valorV[i+1] = Double.parseDouble(checkV2);
-					resul[i] = (valorV[i] * valorV[i+1]);	
-				}
-				if(texto.charAt(i) == '/'){
-					checkV1 += texto.charAt(i-1);
-					valorV[i] = Double.parseDouble(checkV1);
-					checkV2 += texto.charAt(i+1);
-					valorV[i+1] = Double.parseDouble(checkV2);
-					resul[i] = (valorV[i] / valorV[i+1]);				}
-				}
-			}
-		}
-
-		/*Precisa terminar esses metodos, pode ser aqui mesmo ou fazer uma classe para essas funçoes*/
-		public void findCondicao(){
-			while(ok){
-				for(i=0;i<this.texto.length();i++){
-					if(this.texto.equals("if")){
-
-					}
-				}
-			}
-		}
-
-		public void findIteracao(){
-			while(ok){
-				for(i=0;i<this.texto.length();i++){
-					if(this.texto.equals("loop")){
-
-					}
-				}
-			}
-		}
-
-		public void findPrint(){
-			while(ok){
-				for(i=0;i<this.texto.length();i++){
-					if(this.texto.equals("print")){
-
-					}
-				}
-			}
-		}
-
-		public void findScan(){
-			while(ok){
-				for(i=0;i<this.texto.length();i++){
-					if(this.texto.equals("scan")){
-
-					}
-				}
-			}
-		}
-	}
+}
