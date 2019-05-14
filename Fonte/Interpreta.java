@@ -104,9 +104,13 @@ class Interpreta{
 
 					/*Encontra a condição*/
 					if(this.code[i].equals("@if")){
-						i++; v1 = Double.parseDouble(this.code[i]);
+						i++; //v1 = Double.parseDouble(this.code[i]);
+						//ISSO DA CERTO?
+						v1 = this.var[i].getValue();
 						i++; aux = this.code[i];
-						i++; v2 = Double.parseDouble(this.code[i]);
+						i++; //v2 = Double.parseDouble(this.code[i]);
+						//ISSO DA CERTO?
+						v2 = this.var[i].getValue();
 						while(y.se(v1, v2, aux)){
 							//i++;
 							if(this.code[i].equals("{")){
