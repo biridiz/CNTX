@@ -1,4 +1,4 @@
-class Condi{
+class Cond{
 
 	//private Variavel[] var;
 	private boolean ok;
