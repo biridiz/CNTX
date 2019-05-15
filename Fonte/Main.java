@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.io.*;
 
-class Linguala{
+class Main{
 
 	public static void main(String args[]) throws IOException{
 		

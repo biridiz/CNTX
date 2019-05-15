@@ -7,12 +7,11 @@ class Interpreta{
 	private Variavel[] var = new Variavel[200];
 	private Matematica m = new Matematica();
 	private Condi y = new Condi();
-	private Laco l = new Laco();
 	private boolean ok;
 
 	public void start(String[] code){
 
-		int i, a, b, c;
+		int i, a=0, b=0, c=0;
 		String aux;
 		Double v1 =0.0, v2 =0.0;
 		String[] check = new String[500];
@@ -28,11 +27,11 @@ class Interpreta{
         /*Confere a palavra main para iniciar o código*/
 		for(i=0;i<this.code.length;i++){
 			if(this.code[i] != null){
-				if(this.code[i].equals("main")){
+				if(this.code[i].equals("main->")){
 					ok = true;
 				}
 				else{
-					System.out.println("ERRO linha -> ");
+					System.out.println("***FATAL ERRO***");
 				}
 			}
 		}
@@ -74,7 +73,7 @@ class Interpreta{
 					if(this.code[i].equals("+")){
 						aux = this.code[i];
 						v1 = Double.parseDouble(this.code[i-1]);
-						v2 = Double.parseDouble(this.code[i+1]);
+						v2 = Double.parseDouble(this.code[i+2]);
 						this.var[i].setValue(m.mat(v1, v2, aux));
 					}
 
@@ -82,7 +81,7 @@ class Interpreta{
 					if(this.code[i].equals("-")){
 						aux = this.code[i];
 						v1 = Double.parseDouble(this.code[i-1]);
-						v2 = Double.parseDouble(this.code[i+1]);
+						v2 = Double.parseDouble(this.code[i+2]);
 						this.var[i].setValue(m.mat(v1, v2, aux));
 					}
 
@@ -90,7 +89,7 @@ class Interpreta{
 					if(this.code[i].equals("*")){
 						aux = this.code[i];
 						v1 = Double.parseDouble(this.code[i-1]);
-						v2 = Double.parseDouble(this.code[i+1]);
+						v2 = Double.parseDouble(this.code[i+2]);
 						this.var[i].setValue(m.mat(v1, v2, aux));
 					}
 
@@ -98,7 +97,7 @@ class Interpreta{
 					if(this.code[i].equals("/")){
 						aux = this.code[i];
 						v1 = Double.parseDouble(this.code[i-1]);
-						v2 = Double.parseDouble(this.code[i+1]);
+						v2 = Double.parseDouble(this.code[i+2]);
 						this.var[i].setValue(m.mat(v1, v2, aux));
 					}
 
@@ -106,13 +105,19 @@ class Interpreta{
 					if(this.code[i].equals("@if")){
 						i++;
 						if(this.code[i] == this.var[i].getName()){
-								v1 = this.var[i].getValue();
-							}
+							v1 = this.var[i].getValue();
+						}
+						else{
+							System.out.println("ERRO @var não declarada linha ->");
+						}
 						i++; 
 						aux = this.code[i];
 						i++;
 						if(this.code[i] == this.var[i].getName()){
 							v2 = this.var[i].getValue();
+						}
+						else{
+							System.out.println("ERRO @var não declarada linha ->");
 						}
 						while(y.se(v1, v2, aux)){
 							//i++;
@@ -121,30 +126,34 @@ class Interpreta{
 									check[i] += code[i];
 								}
 								x.start(check);
-								break;
 							}
 							else{
 								System.out.println("ERRO '{' linha -> ");
-								break;
 							}
+							break;
 						}
 					}
 
+					/*Encontra laço de iteração*/
 					if(this.code[i].equals("@loop")){
-						i++; a = Integer.parseInt(this.code[i]);
-						i++; b = Integer.parseInt(this.code[i]);
-						i++; c = Integer.parseInt(this.code[i]);
-						l.loop(a, b, c);
+						i++;
+						while(this.code[i] != ";"){
+							if(this.code[i] == this.var[i].getName()){
+								v1 = this.var[i].getValue();
+							}
+							else{
+								v1 = Double.parseDouble(this.code[i]);
+							}
+						}
+						while(this.code[i] != "}"){
+							for(i=0;i<v1;i++){
+								check[i] = code[i];
+							}
+							x.start(check);
+						}
 					}
 				}
 			}
 		}
-
-
-
-
-
-
 	}
-
 }
