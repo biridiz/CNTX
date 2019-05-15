@@ -6,7 +6,7 @@ class Interpreta{
 	private Interpreta x = new Interpreta();
 	private Variavel[] var = new Variavel[200];
 	private Matematica m = new Matematica();
-	private Condi y = new Condi();
+	private Cond y = new Cond();
 	private boolean ok;
 
 	public void start(String[] code){
