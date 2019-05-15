@@ -2,7 +2,7 @@
 class Interpreta{
 
 	/*Declaração de variaveis*/
-	private String[] code;
+	private String[] code = new String[2000];
 	private Interpreta x = new Interpreta();
 	private Variavel[] var = new Variavel[200];
 	private Matematica m = new Matematica();
@@ -11,7 +11,7 @@ class Interpreta{
 
 	public void start(String[] code){
 
-		int i, a=0, b=0, c=0;
+		int i;
 		String aux;
 		Double v1 =0.0, v2 =0.0;
 		String[] check = new String[500];
