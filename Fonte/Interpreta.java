@@ -15,6 +15,7 @@ class Interpreta{
 
 	public void start(String[] code){
 
+		this.code = code;
 		int i;
 		String aux;
 		Double v1 =0.0, v2 =0.0;
@@ -33,6 +34,7 @@ class Interpreta{
 				}
 				else{
 					System.out.println("***FATAL ERRO***");
+					break;
 				}
 			}
 			else{

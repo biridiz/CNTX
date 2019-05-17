@@ -22,17 +22,18 @@ public class Main{
 
             while(s.hasNextLine()){
                 linha = s.nextLine();
-                for (i=0;i<linha.length();i++) {
+                for(i=0;i<linha.length();i++) {
                     aux = linha.split(" ");
-                    code = aux;  
-               }            
-            }
+                    code = aux; 
+                    w = new Interpreta(code);
+                    w.start(code); 
+                }          
+            } 
             
             for(i=0;i<code.length;i++){
                 System.out.println(code[i]);
-            }
-            w = new Interpreta(code);
-            w.start(code);
+            }  
+
         }
 		
 		catch(IOException ioe){
