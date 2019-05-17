@@ -2,12 +2,16 @@
 class Interpreta{
 
 	/*Declaração de variaveis*/
-	private String[] code = new String[2000];
-	private Interpreta x = new Interpreta();
+	private String[] code;
+	//private Interpreta x = new Interpreta();
 	private Variavel[] var = new Variavel[200];
 	private Matematica m = new Matematica();
 	private Cond y = new Cond();
 	private boolean ok;
+	
+	public Interpreta(String[] s){
+		code = new String[s.length];
+	}
 
 	public void start(String[] code){
 
@@ -16,13 +20,10 @@ class Interpreta{
 		Double v1 =0.0, v2 =0.0;
 		String[] check = new String[500];
 
-		/*Tira os espaços em branco*/
-		for(i=0;code[i] != null; i++){
-            if(this.code[i].contains("@print")==false){
-                code[i] = code[i].replaceAll(" ","");
-                code[i] = code[i].replaceAll("\t","");
-            }
-        }
+		for(i=0;i<this.code.length;i++){
+			System.out.println(this.code[i]);
+			break;
+		}
 
         /*Confere a palavra main para iniciar o código*/
 		for(i=0;i<this.code.length;i++){
@@ -33,6 +34,10 @@ class Interpreta{
 				else{
 					System.out.println("***FATAL ERRO***");
 				}
+			}
+			else{
+				System.out.println("***FATAL ERRO***");
+				break;
 			}
 		}
 
@@ -125,6 +130,7 @@ class Interpreta{
 								for(i=0;this.code[i] == "}";i++){
 									check[i] += code[i];
 								}
+								Interpreta x = new Interpreta(check);
 								x.start(check);
 							}
 							else{
@@ -149,6 +155,7 @@ class Interpreta{
 							for(i=0;i<v1;i++){
 								check[i] = code[i];
 							}
+							Interpreta x = new Interpreta(check);
 							x.start(check);
 						}
 					}
