@@ -8,7 +8,7 @@ public class Main{
 	public static void main(String[] args) throws IOException{
 
 		try{
-            int i = 0;
+            int i = 0, k = 0;
             File f;
             Scanner s;
             Interpreta w;
@@ -24,17 +24,13 @@ public class Main{
                 linha = s.nextLine();
                 for(i=0;i<linha.length();i++) {
                     aux = linha.split(" ");
-                    code = aux; 
+                    code = aux;
                     w = new Interpreta(code);
-                    w.start(code); 
+                    w.start(code);
                 }          
             } 
-            
-            for(i=0;i<code.length;i++){
-                System.out.println(code[i]);
-            }  
-
         }
+        
 		
 		catch(IOException ioe){
 			ioe.printStackTrace();
