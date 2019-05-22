@@ -77,7 +77,7 @@ class Interpreta{
 						i+=2;
 						v2 = Double.parseDouble(this.code[i]);
 						var[k].setValue(m.mat(v1, v2, aux));
-						System.out.println(var[k].getValue());
+						//System.out.println(var[k].getValue());
 					}
 
 					/*Encontra operação de subtração*/
@@ -87,9 +87,7 @@ class Interpreta{
 						v1 = Double.parseDouble(this.code[i]);
 						i+=2;
 						v2 = Double.parseDouble(this.code[i]);
-						//this.var[i].setValue(m.mat(v1, v2, aux));
-						Double r = v1 - v2;
-						System.out.println(r);
+						var[k].setValue(m.mat(v1, v2, aux));
 					}
 
 					/*Encontra operação de multiplicação*/
@@ -99,9 +97,7 @@ class Interpreta{
 						v1 = Double.parseDouble(this.code[i]);
 						i+=2;
 						v2 = Double.parseDouble(this.code[i]);
-						//this.var[i].setValue(m.mat(v1, v2, aux));
-						Double r = v1 * v2;
-						System.out.println(r);
+						var[i].setValue(m.mat(v1, v2, aux));
 					}
 
 					/*Encontra operação de divisão*/
@@ -111,9 +107,7 @@ class Interpreta{
 						v1 = Double.parseDouble(this.code[i]);
 						i+=2;
 						v2 = Double.parseDouble(this.code[i]);
-						//this.var[i].setValue(m.mat(v1, v2, aux));
-						Double r = v1 /	 v2;
-						System.out.println(r);
+						var[i].setValue(m.mat(v1, v2, aux));
 					}
 				}
 			}
