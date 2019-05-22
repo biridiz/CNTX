@@ -3,10 +3,6 @@ class Variavel{
 	private String name;
 	private double value;
 
-	public Variavel(){
-
-	}
-
 	public void setName(String n){
 		this.name = n;
 	}

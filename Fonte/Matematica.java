@@ -3,20 +3,22 @@ class Matematica{
 	private Variavel[] var;
 
 	public double mat(double a, double b, String c){
-		if(c == "+"){
-			return(a+b);
+		double r = 0;
+
+		if(c.equals("+")){
+			r = a+b;
 		}
-		else if(c == "-"){
-			return(a-b);
+		else if(c.equals("-")){
+			r = a-b;
 		}
-		else if(c == "*"){
-			return(a*b);
+		else if(c.equals("*")){
+			r = a*b;
 		}
-		else if(c == "/"){
-			return(a/b);
+		else if(c.equals("/")){
+			r = a/b;
 		}
 
-		return a;
+		return r;
 	}
 
 	

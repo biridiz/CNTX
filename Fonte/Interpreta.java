@@ -11,6 +11,9 @@ class Interpreta{
 	public Interpreta(String[] s){
 		code = new String[s.length];
 		this.var = new Variavel[200];
+		for(int j=0; j<var.length;j++){
+			this.var[j] = new Variavel();
+		}
 	}
 
 	public void start(String[] code){
@@ -49,19 +52,16 @@ class Interpreta{
 					if(this.code[i].equals("@var")){
 						i++;
 						aux = this.code[i];
-						System.out.println(aux);
-						//this.var[k].setName(aux);
-						//System.out.println(this.var[k].getName());
+						var[k].setName(aux);
 						i++;
 						
 						/*Adiciona valor a variavel*/
 						if(this.code[i].equals("=")){
 							i++;
 							v1 = Double.parseDouble(this.code[i]);
-							System.out.println(v1);
-							//this.var[i].setValue(v1);
-							//System.out.println(var[i].getName());
-							//System.out.println(var[i].getValue());
+							var[k].setValue(v1);
+							//System.out.println(var[k].getName());
+							//System.out.println(var[k].getValue());
 						}
 					}
 				}
@@ -76,9 +76,8 @@ class Interpreta{
 						v1 = Double.parseDouble(this.code[i]);
 						i+=2;
 						v2 = Double.parseDouble(this.code[i]);
-						//this.var[i].setValue(m.mat(v1, v2, aux));
-						Double r = v1 + v2;
-						System.out.println(r);
+						var[k].setValue(m.mat(v1, v2, aux));
+						System.out.println(var[k].getValue());
 					}
 
 					/*Encontra operação de subtração*/
@@ -113,12 +112,14 @@ class Interpreta{
 						i+=2;
 						v2 = Double.parseDouble(this.code[i]);
 						//this.var[i].setValue(m.mat(v1, v2, aux));
-						Double r = v1 / v2;
+						Double r = v1 /	 v2;
 						System.out.println(r);
 					}
 				}
 			}
 
+			for(i=0;i<this.code.length;i++){
+				if(this.code[i] != null){
 					/*Encontra a condição*/
 					if(this.code[i].equals("@if")){
 						i++;
@@ -152,6 +153,8 @@ class Interpreta{
 							break;
 						}
 					}
+				}
+			}
 
 					/*Encontra laço de iteração*/
 					if(this.code[i].equals("@loop")){
