@@ -2,7 +2,7 @@
 class Interpreta{
 
 	/*Declaração de variaveis*/
-	private String[] code = new String[200];
+	private String[] code = new String[2000];
 	private Matematica m = new Matematica();
 	private Cond y = new Cond();
 	private Variavel[] var;
@@ -21,15 +21,28 @@ class Interpreta{
 		this.linha = s;
 		int i=0, k=0, j=0;
 		String[] pilha = new String[200];
+		String[] yes = new String[20];
 		String aux;
 		Double v1 =0.0, v2 =0.0;
 		String[] check = new String[500];
 
-		for(i=0;i<linha.length;i++) {
-            if(linha[i] != null){
-            	code = linha[i].split(" ");
-            }
-        }
+		/*Split das linhas para vetor de Strings*/
+       	do{
+       		yes = linha[i].split(" ");
+       		for(k=0;k<yes.length;k++){
+       			code[j] = yes[k];
+       			j++;
+       		}
+       		i++;
+       	}
+       	while(linha[i] != null);
+
+       	/*Print apenas para testar a funcionalidade*/
+       	for(i=0;i<code.length;i++){
+       		if(code[i] != null){
+       			System.out.println(code[i]);
+       		}
+       	}
         
         System.out.println("**********************");
 
@@ -38,22 +51,10 @@ class Interpreta{
 				/*Encontra palavra chave @print*/
 				if(this.code[i].equals("@print")){
 					i++;
-					while(code[i] != null){
-						System.out.print(code[i]+" ");
-						pilha[j] = code[i];
-						j++;
-						i++;
+					System.out.print(code[i]+" "); //<- Só para teste
+					if(code[i].equals("|")){
+						break;
 					}
-					
-						/*if(this.code[i].equals("@var")){
-							this.var[i].imprimeValue();
-						}
-						if(this.code[i].equals("'")){
-							i++;
-							if(this.code[i] != "'"){
-								System.out.println(this.code[i]);
-							}
-						}*/	
 				}
 			}
 		}
@@ -72,8 +73,8 @@ class Interpreta{
 						i++;
 						v1 = Double.parseDouble(this.code[i]);
 						var[k].setValue(v1);
-						System.out.println(var[k].getName());
-						System.out.println(var[k].getValue());
+						System.out.println(var[k].getName()); //<- Só para teste
+						System.out.println(var[k].getValue()); //<-Só para teste
 					}
 				}
 			}
@@ -89,7 +90,7 @@ class Interpreta{
 					i+=2;
 					v2 = Double.parseDouble(this.code[i]);
 					var[k].setValue(m.mat(v1, v2, aux));
-					System.out.println(var[k].getValue());
+					//System.out.println(var[k].getValue());
 				}
 
 				/*Encontra operação de subtração*/
@@ -129,7 +130,7 @@ class Interpreta{
 
 		for(i=0;i<this.code.length;i++){
 			if(this.code[i] != null){
-				/*Encontra a condição*/
+				/*Encontra a condição if */
 				if(this.code[i].equals("@if")){
 					i++;
 					if(this.code[i] == this.var[i].getName()){
