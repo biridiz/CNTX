@@ -19,11 +19,12 @@ class Variavel{
 		return this.value;
 	}
 
-	public void imprimeName(){
-		System.out.println(this.name);
+	public void memoryVar(String s, double v){
+		
 	}
 
-	public void imprimeValue(){
-		System.out.println(this.value);	
+	public void atualizaVar(double v){
+
 	}
+
 }
