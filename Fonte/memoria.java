@@ -7,29 +7,28 @@ public class memoria {
 		var = new Variavel[500];
 		ult = 0;
 	}
-	
+
 	public double verVar(String a){
-            int i ;
+            int i;
+            System.out.println("entrou");
             for(i = 0; i < ult; i++){
 		if((var[i].getName()).equals(a)){
                     return var[i].getValue();
 		}
             }
-        return 1;
+        return 0;
 	}
 	
-	public boolean atualizaVar(String a, double valor){
+	public void atualizaVar(String a, double valor){
             int i;
             for(i = 0; i < ult; i++){
 			if(var[i].getName().equals(a)){
 				var[i].setValue(valor);
-				return true;
 			}
 		}
 		var[i] = new Variavel();
                 var[i].setValue(valor);
                 var[i].setName(a);
 		ult++;
-		return false;
 	}
 }

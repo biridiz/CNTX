@@ -14,12 +14,11 @@ class Interpreta{
     private String[] linha;
     private boolean ok = true;
     memoria mem;
-    private ArrayList<String> codigo = new ArrayList<String>();
-
     private String[] pilha;
     private Scanner s;
     private int p;
-	public saida sair;
+    public saida sair;
+    private String temp;
     
 	public Interpreta(){
 		this.var = new Variavel[200];
@@ -28,79 +27,50 @@ class Interpreta{
 		sair = new saida();
 	}
 
-	public void start(String s[]){
-		this.linha = s;
-		int i=0, k=0, j=0, q = 0;;
-		String[] yes = new String[20];
-		String aux;
-		Double v1 =0.0, v2 =0.0;
-		String[] check = new String[500];
-
-		/*Split das linhas para vetor de Strings*/
-       	do{
-       		yes = linha[i].split(" ");
-       		for(k=0;k<yes.length;k++){
-       			code[j] = yes[k];
-       			j++;
-       		}
-       		i++;
-       	}
-       	while(linha[i] != null);
-
-        //Adiciona Tudo em uma ArrayList sem as posições NULL
-       	for(i=0;i<code.length;i++){
-       		if(code[i] != null){
-                        codigo.add(code[i]);  
-       		}
-       	}
-        //Gambiarra colocar tudo em um vetor sem nenhum null
-        String[] gamb = new String[codigo.size()];
-        for(int ppp = 0; ppp < codigo.size(); ppp++){
-            gamb[ppp] = codigo.get(ppp);        
-        }
-        codigo.clear();
-        this.verifica(gamb);
-        /* verifica se imprime todas strings
-        int ii;
-	for(ii = 0; ii < gamb.length; ii++){
-            System.out.println(gamb[ii]);
-            }*/
-	}
-	
 	public void verifica(String[] a){
+            String temp;
             int i;
-            for(i=0; i < a.length; i++){
+            for(i=0; i < a.length && a[i] != null; i++){
+                a[i] = a[i].trim();
 			a[i] = a[i].replace("@if","1");
-			a[i] = a[i].replace("@endf","2");
+			a[i] = a[i].replace("@end if","2");
 			a[i] = a[i].replace("@while","3");
-			a[i] = a[i].replace("@endw","4");
+			a[i] = a[i].replace("@end while","4");
 			a[i] = a[i].replace("@var","5");
 			a[i] = a[i].replace("@print","p");
-			a[i] = a[i].replace(";",";");
-			a[i] = a[i].replace("@pegar","g");
+			a[i] = a[i].replace("@end print",";");
+			a[i] = a[i].replace("@input","i");
 		}
-		int aux;
+            
             for(i=0; i < a.length; i++){
                 char p = a[i].charAt(0);
-				int aux0 = i;
-				int aux1 = 0;
-				int aux2 = 0;
-				switch(p){
-						case'p':
-                                                   
-						while(!a[aux0].equals(";")){
-                                                        System.out.println("entrou");
-                                                        aux0++;
-							aux1++;
-						}
-						String[] temp = new String[aux1];
-						for(aux0 = aux0; aux0 < temp.length; aux0++){
-							temp[aux2] = a[aux0];
-						}
-                                                
-						//sair.imprime(temp);
-						break;
-				}
+                temp=a[i].substring(1);
+		temp=temp.trim();      
+		switch(p){
+                    case'p':  
+                        sair.imprime(temp);
+                        break;
+                        
+                    case 'i':
+                        double valor = s.nextDouble();
+                        mem.atualizaVar(temp,valor);
+                        System.out.println(mem.verVar(temp));
+                    break;
+						
+                    case '1':
+				
+                    break;
+					
+                    case '2':
+					
+                    break;
+						
+                    case '5':
+					
+                    break;
+						
+					
+		}
             }
 	}
 	/*

@@ -19,10 +19,10 @@ class Main{
             w = new Interpreta();
             
             while(s.hasNext()){
-                linha[i] = s.nextLine();
-                i++;
+                    linha[i] = s.nextLine();
+                    i++;
             }
-            w.start(linha);
+            w.verifica(linha);
         }
 		catch(FileNotFoundException e){
 			System.out.println("Nao foi possivel ler o arquivo: (desconhecido)");

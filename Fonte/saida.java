@@ -5,11 +5,12 @@ public class saida{
         
     }
     
-    public void imprime(String[] expressao){
-		for(int i=0; i<expressao.length; i++){
-				System.out.print(expressao[i]+" ");
+    public void imprime(String texto){
+		String[] str = texto.split("&&");
+		for(int i=0; i<str.length; i++){
+			str[i] = str[i].trim();
+                        System.out.print(str[i]+" ");
 			}
-                System.out.println();
 		}
+}
 
-	}
