@@ -1,3 +1,5 @@
+package trabjava;
+
 class Cond{
 
 	//private Variavel[] var;

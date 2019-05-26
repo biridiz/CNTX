@@ -1,10 +1,12 @@
+package trabjava;
+
 class Variavel{
 
 	private String name;
 	private double value;
 
 	public void setName(String n){
-		this.name = n;
+		this.name = n;   
 	}
 
 	public void setValue(double v){
