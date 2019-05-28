@@ -10,8 +10,8 @@ class Fila{
 		}
 	}
 
-	public void setFila(String s, double v){
-		this.name[i] = s;
+	public void setFila(String s, double v){ //-> Falta garantir que se ocorrer substituicao de valor
+		this.name[i] = s;						// nao ficara armazenado duas variaveis com mesmo nome
 		this.value[i] = v;
 		System.out.println("\n"+this.name[i]); //-> (teste)Está funcionando
 		System.out.println(this.value[i]); //-> (teste)Está funcionando 
