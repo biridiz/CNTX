@@ -1,8 +1,5 @@
 import java.util.Scanner;
-import java.util.Arrays;
 import java.io.*;
-import java.lang.*;
-import java.util.ArrayList;
 
 public class Main{
 

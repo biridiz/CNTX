@@ -12,7 +12,6 @@ class Cond{
 			else{
 				ok = false;
 			}
-			return ok;
 		}
 
 		if(c == "<"){
@@ -22,7 +21,6 @@ class Cond{
 			else{
 				ok = false;
 			}
-			return ok;
 		}
 
 		if(c == ">"){
@@ -32,7 +30,6 @@ class Cond{
 			else{
 				ok = false;
 			}
-			return ok;
 		}
 
 		if(c == "!="){
@@ -42,7 +39,6 @@ class Cond{
 			else{
 				ok = false;
 			}
-			return ok;
 		}
 
 		if(c == "<="){
@@ -52,7 +48,6 @@ class Cond{
 			else{
 				ok = false;
 			}
-			return ok;
 		}
 
 		if(c == ">="){
@@ -62,7 +57,6 @@ class Cond{
 			else{
 				ok = false;
 			}
-			return ok;
 		}
 	
 	return ok;

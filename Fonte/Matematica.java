@@ -19,6 +19,9 @@ class Matematica{
 				r = a/b;
 			}
 		}
+		else if(c.equals("%")){
+			r = a%b;
+		}
 
 		return r;
 	}

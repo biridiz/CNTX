@@ -8,10 +8,9 @@ class Interpreta{
 	private Fila f = new Fila();
 	private Variavel[] var;
 	private String[] linha;
-	private boolean ok = true;
 	
 	public Interpreta(){
-		this.var = new Variavel[200];
+		this.var = new Variavel[2];
 		for(int j=0; j<var.length;j++){
 			this.var[j] = new Variavel();
 		}
@@ -20,7 +19,7 @@ class Interpreta{
 	public void start(String s[]){
 
 		this.linha = s;
-		int i=0, k=0, j=0;
+		int i=0, k=0, j=0, v=0;
 		String[] pilha = new String[200];
 		String[] yes = new String[20];
 		String aux;
@@ -52,6 +51,9 @@ class Interpreta{
 				/*Encontra palavra chave @print*/
 				if(this.code[i].equals("@print")){
 					i++;
+					if(f.checkFila(this.code[i])){
+						System.out.println(f.getFila(code[i]));
+					}
 					System.out.print(code[i]+" "); //<- Só para teste
 				}
 			}
@@ -63,18 +65,16 @@ class Interpreta{
 				if(this.code[i].equals("@var")){
 					i++;
 					aux = this.code[i];
-					var[k].setName(aux);
+					var[v].setName(aux);
 					i++;
 					
 					/*Adiciona valor a variavel*/
 					if(this.code[i].equals("=")){
 						i++;
 						v1 = Double.parseDouble(this.code[i]);
-						var[k].setValue(v1);
-						//System.out.println(var[k].getName()); //<- Só para teste
-						//System.out.println(var[k].getValue()); //<-Só para teste
+						var[v].setValue(v1);
 					}
-					f.setFila(var[k].getName(), var[k].getValue());
+					f.setFila(var[v].getName(), var[v].getValue());
 				}
 			}
 		}
@@ -86,23 +86,27 @@ class Interpreta{
 					this.code[i].equals("-") ||
 					this.code[i].equals("*") ||
 					this.code[i].equals("/") ){
+					i-=3;
+					String auxNvarX = this.code[i];
+					i+=3;
 					aux = this.code[i];
 					i--;
-					if(this.code[i].equals(var[k].getName())){
-						v1 = var[k].getValue();  //-> ajustar fila de variaveis pra evitar conflito
+					if(f.checkFila(this.code[i])){
+						v1 = f.getFila(this.code[i]);  
 					}
 					else{
 						v1 = Double.parseDouble(this.code[i]);
 					}
 					i+=2;
-					if(this.code[i].equals(var[k].getName())){
-						v1 = var[k].getValue(); //-> ajustar fila de variaveis pra evitar conflito
+					if(f.checkFila(this.code[i])){
+						v1 = f.getFila(this.code[i]); 
 					}
 					else{
 						v2 = Double.parseDouble(this.code[i]);
 					}
-					var[k].setValue(m.mat(v1, v2, aux)); //-> essa atribuição precisa estar ligada a um nome de varriavel
-					//System.out.println(var[k].getValue());
+					var[v].setValue(m.mat(v1, v2, aux));
+					var[v].setName(auxNvarX);
+					f.setFila(var[v].getName(), var[v].getValue());
 				}	
 			}
 		}
