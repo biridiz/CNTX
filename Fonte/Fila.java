@@ -1,37 +1,25 @@
 class Fila{
 
-	private String[] string;
-	private boolean top;
-	private boolean next;
+	private String[] string = new String[200];
+	private double[] valor = new double[200];
+	private int i = 0;
 
 	public Fila(){
-		this.string = new String[200];
 	}
 
-	public boolean setFila(String[] s, int t){
-		String[] aux = new String[30];
-		for(int i=0;i<s.length;i++){
-			aux[i] = s[i];
-		}
-		if(t == 0){
-			top = true;
-			string = aux;
-		}
-		else{
-			top = false;
-			next = true;
-		}
-		return true;
+	public void setFila(String s, double v){
+		this.string[i] = s;
+		this.valor[i] = v;
+		i++;
 	}
 
-	public String[] getFila(String[] s){
-		for(int i=0;i<s.length;i++){
-			if(top == true){
-				if(this.string[i] == s[i]){
-					top = false;
-				}
+	public double getFila(String s){
+		double aux = 0.0;
+		for(int j=0; j<string.length; j++){
+			if(this.string[j].equals(s)){
+				aux = this.valor[i];
 			}
 		}
-		return string;
+		return this.valor[i];
 	}
 }	

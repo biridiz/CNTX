@@ -5,6 +5,7 @@ class Interpreta{
 	private String[] code = new String[2000];
 	private Matematica m = new Matematica();
 	private Cond y = new Cond();
+	private Fila f = new Fila();
 	private Variavel[] var;
 	private String[] linha;
 	private boolean ok = true;
@@ -51,12 +52,6 @@ class Interpreta{
 				/*Encontra palavra chave @print*/
 				if(this.code[i].equals("@print")){
 					i++;
-					do{
-						if(code[i].equals(var[k].getName())){
-							var[k].imprimeVar(code[i]);
-						}
-						i++;
-					}while(code[i] != ",");
 					System.out.print(code[i]+" "); //<- Só para teste
 				}
 			}
@@ -79,6 +74,7 @@ class Interpreta{
 						//System.out.println(var[k].getName()); //<- Só para teste
 						//System.out.println(var[k].getValue()); //<-Só para teste
 					}
+					f.setFila(var[k].getName(), var[k].getValue());
 				}
 			}
 		}
@@ -89,10 +85,20 @@ class Interpreta{
 				if(this.code[i].equals("+")){
 					aux = this.code[i];
 					i--;
-					v1 = Double.parseDouble(this.code[i]);
+					if(this.code[i].equals(var[k].getName())){
+						v1 = var[k].getValue();  //-> ajustar fila de variaveis pra evitar conflito
+					}
+					else{
+						v1 = Double.parseDouble(this.code[i]);
+					}
 					i+=2;
-					v2 = Double.parseDouble(this.code[i]);
-					var[k].setValue(m.mat(v1, v2, aux));
+					if(this.code[i].equals(var[k].getName())){
+						v1 = var[k].getValue(); //-> ajustar fila de variaveis pra evitar conflito
+					}
+					else{
+						v2 = Double.parseDouble(this.code[i]);
+					}
+					var[k].setValue(m.mat(v1, v2, aux)); //-> essa atribuição precisa estar ligada a um nome de varriavel
 					//System.out.println(var[k].getValue());
 				}
 
@@ -100,10 +106,20 @@ class Interpreta{
 				if(this.code[i].equals("-")){
 					aux = this.code[i];
 					i--;
-					v1 = Double.parseDouble(this.code[i]);
+					if(this.code[i].equals(var[k].getName())){
+						v1 = var[k].getValue();  //-> ajustar fila de variaveis pra evitar conflito
+					}
+					else{
+						v1 = Double.parseDouble(this.code[i]);
+					}
 					i+=2;
-					v2 = Double.parseDouble(this.code[i]);
-					var[k].setValue(m.mat(v1, v2, aux));
+					if(this.code[i].equals(var[k].getName())){
+						v1 = var[k].getValue(); //-> ajustar fila de variaveis pra evitar conflito
+					}
+					else{
+						v2 = Double.parseDouble(this.code[i]);
+					}
+					var[k].setValue(m.mat(v1, v2, aux)); //-> essa atribuição precisa estar ligada a um nome de varriavel
 					//System.out.println(var[k].getValue());
 				}
 
@@ -111,10 +127,20 @@ class Interpreta{
 				if(this.code[i].equals("*")){
 					aux = this.code[i];
 					i--;
-					v1 = Double.parseDouble(this.code[i]);
+					if(this.code[i].equals(var[k].getName())){
+						v1 = var[k].getValue();  //-> ajustar fila de variaveis pra evitar conflito
+					}
+					else{
+						v1 = Double.parseDouble(this.code[i]);
+					}
 					i+=2;
-					v2 = Double.parseDouble(this.code[i]);
-					var[i].setValue(m.mat(v1, v2, aux));
+					if(this.code[i].equals(var[k].getName())){
+						v1 = var[k].getValue(); //-> ajustar fila de variaveis pra evitar conflito
+					}
+					else{
+						v2 = Double.parseDouble(this.code[i]);
+					}
+					var[k].setValue(m.mat(v1, v2, aux)); //-> essa atribuição precisa estar ligada a um nome de varriavel
 					//System.out.println(var[k].getValue());
 				}
 
@@ -122,10 +148,20 @@ class Interpreta{
 				if(this.code[i].equals("/")){
 					aux = this.code[i];
 					i--;
-					v1 = Double.parseDouble(this.code[i]);
+					if(this.code[i].equals(var[k].getName())){
+						v1 = var[k].getValue();  //-> ajustar fila de variaveis pra evitar conflito
+					}
+					else{
+						v1 = Double.parseDouble(this.code[i]);
+					}
 					i+=2;
-					v2 = Double.parseDouble(this.code[i]);
-					var[i].setValue(m.mat(v1, v2, aux));
+					if(this.code[i].equals(var[k].getName())){
+						v1 = var[k].getValue(); //-> ajustar fila de variaveis pra evitar conflito
+					}
+					else{
+						v2 = Double.parseDouble(this.code[i]);
+					}
+					var[k].setValue(m.mat(v1, v2, aux)); //-> essa atribuição precisa estar ligada a um nome de varriavel
 					//System.out.println(var[k].getValue());
 				}
 			}
