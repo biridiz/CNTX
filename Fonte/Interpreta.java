@@ -81,8 +81,11 @@ class Interpreta{
 
 		for(i=0;i<this.code.length;i++){
 			if(this.code[i] != null){
-				/*Encontra operação de soma*/
-				if(this.code[i].equals("+")){
+				/*Encontra operações */
+				if(this.code[i].equals("+") || 
+					this.code[i].equals("-") ||
+					this.code[i].equals("*") ||
+					this.code[i].equals("/") ){
 					aux = this.code[i];
 					i--;
 					if(this.code[i].equals(var[k].getName())){
@@ -100,70 +103,7 @@ class Interpreta{
 					}
 					var[k].setValue(m.mat(v1, v2, aux)); //-> essa atribuição precisa estar ligada a um nome de varriavel
 					//System.out.println(var[k].getValue());
-				}
-
-				/*Encontra operação de subtração*/
-				if(this.code[i].equals("-")){
-					aux = this.code[i];
-					i--;
-					if(this.code[i].equals(var[k].getName())){
-						v1 = var[k].getValue();  //-> ajustar fila de variaveis pra evitar conflito
-					}
-					else{
-						v1 = Double.parseDouble(this.code[i]);
-					}
-					i+=2;
-					if(this.code[i].equals(var[k].getName())){
-						v1 = var[k].getValue(); //-> ajustar fila de variaveis pra evitar conflito
-					}
-					else{
-						v2 = Double.parseDouble(this.code[i]);
-					}
-					var[k].setValue(m.mat(v1, v2, aux)); //-> essa atribuição precisa estar ligada a um nome de varriavel
-					//System.out.println(var[k].getValue());
-				}
-
-				/*Encontra operação de multiplicação*/
-				if(this.code[i].equals("*")){
-					aux = this.code[i];
-					i--;
-					if(this.code[i].equals(var[k].getName())){
-						v1 = var[k].getValue();  //-> ajustar fila de variaveis pra evitar conflito
-					}
-					else{
-						v1 = Double.parseDouble(this.code[i]);
-					}
-					i+=2;
-					if(this.code[i].equals(var[k].getName())){
-						v1 = var[k].getValue(); //-> ajustar fila de variaveis pra evitar conflito
-					}
-					else{
-						v2 = Double.parseDouble(this.code[i]);
-					}
-					var[k].setValue(m.mat(v1, v2, aux)); //-> essa atribuição precisa estar ligada a um nome de varriavel
-					//System.out.println(var[k].getValue());
-				}
-
-				/*Encontra operação de divisão*/
-				if(this.code[i].equals("/")){
-					aux = this.code[i];
-					i--;
-					if(this.code[i].equals(var[k].getName())){
-						v1 = var[k].getValue();  //-> ajustar fila de variaveis pra evitar conflito
-					}
-					else{
-						v1 = Double.parseDouble(this.code[i]);
-					}
-					i+=2;
-					if(this.code[i].equals(var[k].getName())){
-						v1 = var[k].getValue(); //-> ajustar fila de variaveis pra evitar conflito
-					}
-					else{
-						v2 = Double.parseDouble(this.code[i]);
-					}
-					var[k].setValue(m.mat(v1, v2, aux)); //-> essa atribuição precisa estar ligada a um nome de varriavel
-					//System.out.println(var[k].getValue());
-				}
+				}	
 			}
 		}
 
