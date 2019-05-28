@@ -15,7 +15,9 @@ class Matematica{
 			r = a*b;
 		}
 		else if(c.equals("/")){
-			r = a/b;
+			if(a != 0 || b != 0){
+				r = a/b;
+			}
 		}
 
 		return r;

@@ -51,10 +51,13 @@ class Interpreta{
 				/*Encontra palavra chave @print*/
 				if(this.code[i].equals("@print")){
 					i++;
+					do{
+						if(code[i].equals(var[k].getName())){
+							var[k].imprimeVar(code[i]);
+						}
+						i++;
+					}while(code[i] != ",");
 					System.out.print(code[i]+" "); //<- Só para teste
-					if(code[i].equals("|")){
-						break;
-					}
 				}
 			}
 		}
@@ -73,8 +76,8 @@ class Interpreta{
 						i++;
 						v1 = Double.parseDouble(this.code[i]);
 						var[k].setValue(v1);
-						System.out.println(var[k].getName()); //<- Só para teste
-						System.out.println(var[k].getValue()); //<-Só para teste
+						//System.out.println(var[k].getName()); //<- Só para teste
+						//System.out.println(var[k].getValue()); //<-Só para teste
 					}
 				}
 			}
@@ -165,24 +168,27 @@ class Interpreta{
 				}
 			}
 		}
-
-		/*Encontra laço de iteração*/
-		if(this.code[i].equals("@loop")){
-			i++;
-			while(this.code[i] != ";"){
-				if(this.code[i] == this.var[i].getName()){
-					v1 = this.var[i].getValue();
+		for(i=0;i<this.code.length;i++){
+			if(this.code[i] != null){
+			/*Encontra laço de iteração*/
+				if(this.code[i].equals("@loop")){
+					i++;
+					while(this.code[i] != ";"){
+						if(this.code[i] == this.var[i].getName()){
+							v1 = this.var[i].getValue();
+						}
+						else{
+							v1 = Double.parseDouble(this.code[i]);
+						}
+					}
+					while(this.code[i] != "}"){
+						for(i=0;i<v1;i++){
+							check[i] = code[i];
+						}
+						Interpreta x = new Interpreta();
+							x.start(check);
+					}
 				}
-				else{
-					v1 = Double.parseDouble(this.code[i]);
-				}
-			}
-			while(this.code[i] != "}"){
-				for(i=0;i<v1;i++){
-					check[i] = code[i];
-				}
-				Interpreta x = new Interpreta();
-					x.start(check);
 			}
 		}
 	}
