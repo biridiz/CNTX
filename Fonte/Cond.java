@@ -5,7 +5,7 @@ class Cond{
 
 	public boolean se(double a, double b, String c){
 
-		if(c == "=="){
+		if(c.equals("==")){
 			if(a == b){
 				ok = true;
 			}
@@ -14,7 +14,7 @@ class Cond{
 			}
 		}
 
-		if(c == "<"){
+		if(c.equals("<")){
 			if(a < b){
 				ok = true;
 			}
@@ -23,7 +23,7 @@ class Cond{
 			}
 		}
 
-		if(c == ">"){
+		if(c.equals(">")){
 			if(a > b){
 				ok = true;
 			}
@@ -32,7 +32,7 @@ class Cond{
 			}
 		}
 
-		if(c == "!="){
+		if(c.equals("!=")){
 			if(a != b){
 				ok =true;
 			}
@@ -41,7 +41,7 @@ class Cond{
 			}
 		}
 
-		if(c == "<="){
+		if(c.equals("<=")){
 			if(a <= b){
 				ok = true;
 			}
@@ -50,7 +50,7 @@ class Cond{
 			}
 		}
 
-		if(c == ">="){
+		if(c.equals(">=")){
 			if(a >= b){
 				ok = false;
 			}
