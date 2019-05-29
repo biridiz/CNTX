@@ -2,7 +2,7 @@ class Fila{
 
 	private String[] name = new String[100];
 	private double[] value = new double[100];
-	private int i;
+	private int i=0;
 
 	public Fila(){
 		for(int k=0; k<this.name.length; k++){
@@ -11,11 +11,25 @@ class Fila{
 	}
 
 	public void setFila(String s, double v){ //-> Falta garantir que se ocorrer substituicao de valor
-		this.name[i] = s;						// nao ficara armazenado duas variaveis com mesmo nome
-		this.value[i] = v;
-		System.out.println("\n"+this.name[i]); //-> (teste)Está funcionando
-		System.out.println(this.value[i]); //-> (teste)Está funcionando 
-		i++;
+		for(int j=0; j<=i; j++){
+			if(this.name[j].equals(s)){
+				this.name[j] = s;
+				this.value[j] = v;
+				break;
+			}
+			else{
+				if(i!= 0){
+					i++;
+				}
+				this.name[i] = s;
+				this.value[i] = v;
+				break;
+			}
+		}
+		System.out.println(this.name[i]);
+		System.out.println(this.value[i]);
+		System.out.println(i);
+
 	}
 
 	public boolean checkFila(String s){

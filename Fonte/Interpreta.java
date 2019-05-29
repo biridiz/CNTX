@@ -20,7 +20,6 @@ class Interpreta{
 
 		this.linha = s;
 		int i=0, k=0, j=0, v=0;
-		String[] pilha = new String[200];
 		String[] yes = new String[20];
 		String aux;
 		Double v1 =0.0, v2 =0.0;
@@ -85,7 +84,8 @@ class Interpreta{
 				if(this.code[i].equals("+") || 
 					this.code[i].equals("-") ||
 					this.code[i].equals("*") ||
-					this.code[i].equals("/") ){
+					this.code[i].equals("/") ||
+					this.code[i].equals("%")){
 					i-=3;
 					String auxNvarX = this.code[i];
 					i+=3;
