@@ -2,12 +2,13 @@
 class Interpreta{
 
 	/*Declaração de variaveis*/
-	private String[] code = new String[2000];
+	private String[] linha = new String[2000];
 	private Matematica m = new Matematica();
 	private Cond y = new Cond();
 	private Fila f = new Fila();
+	private Saida e = new Saida();
 	private Variavel[] var;
-	private String[] linha;
+	//private String[] linha;
 	
 	public Interpreta(){
 		this.var = new Variavel[2];
@@ -25,7 +26,7 @@ class Interpreta{
 		Double v1 =0.0, v2 =0.0;
 		String[] check = new String[500];
 
-		/*Split das linhas para vetor de Strings*/
+		/*Split das linhas para vetor de Strings
        	do{
        		yes = linha[i].split(" ");
        		for(k=0;k<yes.length;k++){
@@ -35,39 +36,37 @@ class Interpreta{
        		i++;
        	}
        	while(linha[i] != null);
+       	*/
 
        	/*Print apenas para testar a funcionalidade*/
-       	for(i=0;i<code.length;i++){
-       		if(code[i] != null){
-       			System.out.println(code[i]);
-       		}
+       	for(i=0; linha[i] != null; i++){
+       		System.out.println(linha[i]);
        	}
+
+       	//retira os espaços, menos em linhas que tem imprime
+        for(i=0; linha[i] != null; i++){
+            if(this.linha[i].contains("@print")==false) {
+                linha[i]=linha[i].replaceAll(" ","") ;
+                linha[i]=linha[i].replaceAll("\t","") ;
+            }
+        }
         
         System.out.println("**********************");
 
-        for(i=0;i<this.code.length;i++){
-			if(this.code[i] != null){
+        for(i=0;i<this.linha.length;i++){
+			if(this.linha[i] != null){
 				/*Encontra palavra chave @print*/
-				if(this.code[i].equals("@print")){
-					i++;
-					if(f.checkFila(this.code[i])){
-						System.out.println(f.getFila(code[i]));
-					}
-					System.out.print(code[i]+" "); //<- Só para teste
+				if(this.linha[i].contains("@print")==true){
+					e.analisePrint(this.linha[i]);
 				}
-			}
-		}
-
-		/*Encontra variaveis*/
-		for(i=0;i<this.code.length;i++){
-			if(this.code[i] != null){
+		/*Encontra variaveis
 				if(this.code[i].equals("@var")){
 					i++;
 					aux = this.code[i];
 					var[v].setName(aux);
 					i++;
 					
-					/*Adiciona valor a variavel*/
+					//Adiciona valor a variavel
 					if(this.code[i].equals("=")){
 						i++;
 						v1 = Double.parseDouble(this.code[i]);
@@ -75,12 +74,7 @@ class Interpreta{
 					}
 					f.setFila(var[v].getName(), var[v].getValue());
 				}
-			}
-		}
-
-		for(i=0;i<this.code.length;i++){
-			if(this.code[i] != null){
-				/*Encontra operações */
+				//Encontra operações
 				if(this.code[i].equals("+") || 
 					this.code[i].equals("-") ||
 					this.code[i].equals("*") ||
@@ -108,12 +102,7 @@ class Interpreta{
 					var[v].setName(auxNvarX);
 					f.setFila(var[v].getName(), var[v].getValue());
 				}	
-			}
-		}
-
-		for(i=0;i<this.code.length;i++){
-			if(this.code[i] != null){
-				/*Encontra a condição if */
+				//Encontra a condição if
 				if(this.code[i].equals("@if")){
 					i++;
 					if(this.code[i] == this.var[i].getName()){
@@ -146,11 +135,7 @@ class Interpreta{
 						break;
 					}
 				}
-			}
-		}
-		for(i=0;i<this.code.length;i++){
-			if(this.code[i] != null){
-			/*Encontra laço de iteração*/
+			//Encontra laço de iteração
 				if(this.code[i].equals("@loop")){
 					i++;
 					while(this.code[i] != ";"){
@@ -168,8 +153,9 @@ class Interpreta{
 						Interpreta x = new Interpreta();
 							x.start(check);
 					}
-				}
+				}*/
 			}
 		}
+
 	}
 }
