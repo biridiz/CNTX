@@ -6,11 +6,11 @@ public class Main{
 	public static void main(String[] args) throws IOException{
 
 		try{
-            int i = 0, k = 0, j = 0;
+            int i = 0;
             File f;
             Scanner s;
             Interpreta w;
-            String[] linha = new String[200];
+            String[] linha = new String[500];
             
             f = new File(args[0]);
             s = new Scanner(f);

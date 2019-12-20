@@ -1,31 +1,23 @@
 class Saida{
 
-	private String nome;
-	private String msg;
-	private Fila f = new Fila();
-	private int j;
+	private String print_var;
+	private String print_texto;
 
-	public void analisePrint(String s){
-		for(j = 0; j<s.length(); j++){
-			if(s.contains("(") == true && s.contains(")") == true){
-				if(s.charAt(j) == '('){
+	public void analisePrint(char[] c){
+		
+		for(int j=0; j<c.length; j++){
+			if(c[j] == '('){
+				j++;
+				if(c[j] == '"'){
 					j++;
-					break;
+					while(c[j] != '"'){
+						System.out.print(c[j]);
+						j++;
+					}
 				}
 			}
 		}
-		while(s.charAt(j) != ')'){
-			if(s.charAt(j) == '#'){
-				j++;
-				while(s.charAt(j) != '#'){
-					System.out.print(s.charAt(j));
-					nome += s.charAt(j);
-					if(f.checkFila(nome)) System.out.print(f.getFila(nome));
-					j++;
-				}
-			}	
-			System.out.print(s.charAt(j));
-			j++;	
-		}
+		System.out.print("\n");
+		return;
 	}
 }
