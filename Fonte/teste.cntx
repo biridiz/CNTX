@@ -1,0 +1,2 @@
+@print("Ola mundo lindo e maravilhoso")
+@var: minha_var
