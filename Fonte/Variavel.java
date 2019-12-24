@@ -2,8 +2,10 @@ class Variavel{
 
 	private String name;
 	private double value;
-	private boolean top;
-	private boolean next;
+
+	public Variavel(){
+
+	}
 
 	public void setName(String n){
 		this.name = n;
@@ -23,9 +25,10 @@ class Variavel{
 		return this.value;
 	}
 
-	public void analiseVar(char[] c){
+	public Variavel analiseVar(char[] c){
 
 		String aux = new String();
+		double value;
 
 		for(int j=0; j<=c.length; j++){
 			if(c[j] == '='){
@@ -36,33 +39,37 @@ class Variavel{
 					if(c[j] == ':'){
 						StringBuffer nome = new StringBuffer(aux);
 						nome.reverse();
-						System.out.println(nome);
-						this.encontraValor(nome, c);
-						return;
+						aux = String.valueOf(nome);
+						value = this.encontraValor(c);
+						this.name = aux;
+						this.value = value;
+						return this;
 					}	
 				}
 			}
 		}
+		this.name = "";
+		this.value = 0.0;
+		return this;
 	}
 
-	public void encontraValor(StringBuffer n, char[] c){
+	public double encontraValor(char[] c){
 
 		String aux = new String();
-
-		for(int i=0; i<=c.length; i++){
-			aux += c[i];
-		}
+		double value = 0.0;
 		
 		for(int i=0; i<=c.length; i++){
-			if(aux.contais('=')){
-				if(c[i] == '='){
+			if(c[i] == '='){
+				i++;
+				while(c[i] != ';'){
+					aux += c[i];
 					i++;
 				}
-			}
-			else{
-				System.out.println("sem valor");
+				value = Double.parseDouble(aux);
+				return value;
 			}
 		}
+		return value;
 	}
 
 }
