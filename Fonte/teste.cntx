@@ -1,2 +1,3 @@
-@print("Ola mundo lindo e maravilhoso")
-@var: minha_var
+@var: minha_var = 12;
+
+@print("Ola mundo lindo e maravilhoso" + minha_var);
