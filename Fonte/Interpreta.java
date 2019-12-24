@@ -5,13 +5,15 @@ class Interpreta{
 	private String[] linha = new String[500];
 	private Matematica math = new Matematica();
 	private Cond condicional = new Cond();
-	private Fila fila = new Fila();
 	private Saida out = new Saida();
-	private Variavel var = new Variavel();
+	private Variavel[] var = new Variavel[200];
 	private char[] caracteres = null;
+	private int cont_var = 0;
 	
 	public Interpreta(){
-
+		for(int i=0; i<var.length; i++){
+			this.var[i] = new Variavel();
+		}
 	}
 
 	public void start(String s[]){
@@ -29,15 +31,22 @@ class Interpreta{
 			
 			if(this.caracteres != null){
 				
+				/* Econtra palavra chave @var */
+				if(this.linha[i].contains("@var") == true){
+					var[cont_var].analiseVar(this.caracteres);
+					cont_var ++;
+				}
+
 				/* Encontra palavra chave @print */
 				if(this.linha[i].contains("@print") == true){
-					out.analisePrint(this.caracteres);
+					out.analisePrint(this.caracteres, var, linha[i]);
+					System.out.print(out.print_texto + " ");
+					System.out.println(out.print_var);
 				}
+
+				/* Encontra operações matemáticas */
+
 				
-				/*Econtra palavra chave @var */
-				if(this.linha[i].contains("@var") == true){
-					var.analiseVar(this.caracteres);
-				}
 			}
 		}
 		
@@ -168,6 +177,6 @@ class Interpreta{
 				}*/
 			/*}
 		}*/
-
+		return;
 	}
 }
