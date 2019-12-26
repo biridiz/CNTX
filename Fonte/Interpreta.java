@@ -8,7 +8,7 @@ class Interpreta{
 	private Saida out = new Saida();
 	private Variavel[] var = new Variavel[200];
 	private char[] caracteres = null;
-	private int cont_var = 0;
+	private int count_var = 0;
 	
 	public Interpreta(){
 		for(int i=0; i<var.length; i++){
@@ -33,20 +33,31 @@ class Interpreta{
 				
 				/* Econtra palavra chave @var */
 				if(this.linha[i].contains("@var") == true){
-					var[cont_var].analiseVar(this.caracteres);
-					cont_var ++;
+					var[count_var].analiseVar(this.caracteres);
+					count_var ++;
 				}
+
+				/* Encontra operações matemáticas */
+				if(
+					this.linha[i].contains("@print") == false &&
+					this.linha[i].contains("+") == true ||
+					this.linha[i].contains("-") == true ||
+					this.linha[i].contains("*") == true ||
+					this.linha[i].contains("/") == true ||
+					this.linha[i].contains("%") == true
+				){
+					math.analiseOp(this.caracteres, var, linha[i]);
+				}
+
+				/* Encontra condicionais */
+				
 
 				/* Encontra palavra chave @print */
 				if(this.linha[i].contains("@print") == true){
 					out.analisePrint(this.caracteres, var, linha[i]);
 					System.out.print(out.print_texto + " ");
 					System.out.println(out.print_var);
-				}
-
-				/* Encontra operações matemáticas */
-
-				
+				}			
 			}
 		}
 		
