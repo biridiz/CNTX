@@ -19,16 +19,24 @@ class Matematica{
 			}
 		}
 
-		for(int i=0; i<cash.length; i++){
-			if(s.contains(v[i].getName())){
-				cash[j] = v[i].getValue();
-				j++;
+		for(int i=0; i<=v.length; i++){
+			if(j >= 3){
+				break;
+			}
+			else{
+				if(v[i] != null){
+					if(s.contains(v[i].getName()) == true){
+						cash[j] = v[i].getValue();
+						j++;
+					}
+				}
+				else{
+					break;
+				}
 			}
 		}
-
 		cash[0] = this.math(cash[1], cash[2], op);
 		v[0].setValue(cash[0]);
-		System.out.println(cash[0]);
 		return;
 	}
 
