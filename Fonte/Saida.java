@@ -28,6 +28,9 @@ class Saida{
 				}
 				break;
 			}
+			else{
+				break;
+			}
 		}
 
 		return this;
