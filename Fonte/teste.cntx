@@ -1,7 +1,15 @@
 @var: minha_var = 12;
 @var: aa = 9;
 @var: bb = 2;
-minha_var = aa * bb;
+
+minha_var = aa - bb;
 
 
-@print("Ola mundo lindo e maravilhoso" + minha_var);
+@if aa < bb {
+    @print("minha conta ficou: " + minha_var);
+}
+
+@print("teste" + bb);
+
+
+
