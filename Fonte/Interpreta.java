@@ -50,7 +50,24 @@ class Interpreta{
 				}
 
 				/* Encontra condicionais */
-				
+				if(this.linha[i].contains("@if") == true){
+					boolean ok = condicional.analiseCond(this.caracteres, var, linha[i]);
+					if(ok){
+						System.out.println("oi");
+					}
+					else{
+						while(linha[i].contains("}") == false){
+							System.out.println("oi");
+							System.out.println(linha[i]);
+							i++;
+							System.out.println(linha[i]);
+							if(linha[i].contains("}") == true){
+								System.out.println("oi");
+								break;
+							}
+						}
+					}
+				}
 
 				/* Encontra palavra chave @print */
 				if(this.linha[i].contains("@print") == true){
